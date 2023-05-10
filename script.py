@@ -3,7 +3,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 
-# Array with links to web pages
+# Array with links to web pages (Insert here from script.js output)
 url_list = []
 
 # Open a text file for writing
