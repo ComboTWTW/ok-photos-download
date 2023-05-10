@@ -1,6 +1,27 @@
 import os
 import requests
 import re
+from bs4 import BeautifulSoup
+
+# Array with links to web pages
+url_list = []
+
+# Open a text file for writing
+with open("src_links.txt", "w") as f:
+    for url in url_list:
+        # Make a GET request to the URL
+        response = requests.get(url)
+
+        # Parse the HTML content of the response with BeautifulSoup
+        soup = BeautifulSoup(response.content, "html.parser")
+
+        # Find all img tags with class "media-photos_img"
+        img_tags = soup.find_all("img", class_="media-photos_img")
+
+        # Extract the src attribute of each img tag and write it to the file
+        for img_tag in img_tags:
+            src = img_tag.get("src")
+            f.write(src + "\n")
 
 # Create a directory to save the images (if it doesn't exist)
 if not os.path.exists("images"):
